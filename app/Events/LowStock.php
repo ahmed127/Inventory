@@ -36,4 +36,6 @@ class LowStock
             new PrivateChannel('low-stock'),
         ];
     }
+
+    
 }

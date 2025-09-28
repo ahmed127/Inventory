@@ -4,7 +4,6 @@ namespace App\UseCases;
 
 use App\Services\StockServices;
 use App\Services\StockLogServices;
-use Illuminate\Support\Facades\DB;
 
 class TransferStockUseCase
 {
@@ -36,7 +35,6 @@ class TransferStockUseCase
         try {
             $fromStockServices = new StockServices($this->from_warehouse_id, $this->product_id);
             if ($fromStockServices->getStock()->isAvailableQuantity($this->quantity)) {
-                DB::beginTransaction();
                 // Update From Stocks - Deduct
                 $fromStockServices->getStock()->updateQuantity($this->quantity, true);
 
@@ -48,7 +46,6 @@ class TransferStockUseCase
                 // Add Stock Log
                 $stockLogServices = new StockLogServices($this->to_warehouse_id, $this->user_id, $this->product_id, $this->quantity);
                 $stockLogServices->transfer($this->from_warehouse_id);
-                DB::commit();
                 return [
                     'status' => true,
                     'message' => 'Transfer successfully.'

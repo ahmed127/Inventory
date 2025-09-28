@@ -33,11 +33,9 @@ class CreateOrderUseCase
         try {
             $stockServices = new StockServices($this->warehouse_id, $this->product_id);
             if ($stockServices->getStock()->isAvailableQuantity($this->quantity)) {
-                DB::beginTransaction();
                 $stockServices->getStock()->updateQuantity($this->quantity, true);
                 $stockLogServices = new StockLogServices($this->warehouse_id, $this->user_id, $this->product_id, $this->quantity);
                 $stockLogServices->order();
-                DB::commit();
                 return [
                     'status' => true,
                     'message' => 'Order created successfully.'

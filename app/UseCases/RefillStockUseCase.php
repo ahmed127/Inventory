@@ -28,14 +28,12 @@ class RefillStockUseCase
     public function execute(): array
     {
         try {
-            DB::beginTransaction();
             $stockServices = new StockServices($this->warehouse_id, $this->product_id);
             $stockServices->firstOrNew()->updateQuantity($this->quantity);
 
             // Add Stock Log
             $stockLogServices = new StockLogServices($this->warehouse_id, $this->user_id, $this->product_id, $this->quantity);
             $stockLogServices->refill();
-            DB::commit();
             return [
                 'status' => true,
                 'message' => 'Refill stock successfully.'

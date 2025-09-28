@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('warehouse_id')->constrained()->onDelete('cascade');
             $table->foreignId('product_id')->constrained()->onDelete('cascade');
-            $table->unsignedBigInteger('quantity');
+            $table->unsignedBigInteger('quantity')->default(0);
             $table->unsignedBigInteger('min_quantity')->default(30);
             $table->timestamps();
             $table->softDeletes();
