@@ -38,3 +38,7 @@ You can now access the server at http://localhost:8000
 Run test
 
     ./vendor/bin/pest
+
+EndPoints postman
+* Collection: Inventory.postman_collection.json
+* Environment: Local.postman_environment.json
