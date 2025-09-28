@@ -39,6 +39,6 @@ Run test
 
     ./vendor/bin/pest
 
-EndPoints postman
+EndPoints postman in project folder
 * Collection: Inventory.postman_collection.json
 * Environment: Local.postman_environment.json
